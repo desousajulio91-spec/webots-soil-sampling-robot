@@ -1,0 +1,244 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Soil.proto"
+
+WorldInfo {
+  contactProperties [
+    ContactProperties {
+      material1 "soil"
+      material2 "probe_tip"
+      softCFM 0.5
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.0019270162955094315 -0.9999760509700999 -0.006647111736750501 5.717373308157515
+  position 0.04367582181583503 0.9424499581040434 0.5345463461449834
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0.02 0
+  contactMaterial "soil"
+  floorSize 2 2
+  floorAppearance Soil {
+  }
+}
+Robot {
+  translation 0.7208388631654878 0.8174039924969811 0.03445601111681508
+  rotation 0.38117669896635287 0.015917659265782497 -0.9243651617670438 0.001240883048741683
+  children [
+    InertialUnit {
+      name "inertial_unit"
+    }
+    DistanceSensor {
+      translation 0 -0.09 0
+      rotation -9.381857096790023e-07 -0.7071067811862364 0.7071067811862364 -3.1415853071795863
+      name "ds_front"
+      type "sonar"
+    }
+    GPS {
+    }
+    Camera {
+      translation 0 -0.07 0.03
+      rotation 0 0 -1 1.5708
+      fieldOfView 1
+      width 200
+      height 200
+    }
+    SliderJoint {
+      jointParameters JointParameters {
+        position -0.03935789482619906
+        minStop -0.1
+        maxStop 0.1
+      }
+      device [
+        PositionSensor {
+          name "actuator_ps"
+        }
+        LinearMotor {
+          name "linear_actuator"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.08 -0.02435734008401823
+        children [
+          TouchSensor {
+            translation -1.484311140664829e-08 1.3067522908194462e-07 -0.036990249641472156
+            rotation -0.9810063899405448 -0.19361204346564617 0.011867582773116149 2.2163375445356154e-09
+            name "force_sensor"
+            contactMaterial "probe_tip"
+            boundingObject Cylinder {
+              height 0.01
+              radius 0.005
+            }
+            physics Physics {
+            }
+            type "force-3d"
+            linearVelocity -5.8323969300391176e-08 2.296016964306456e-06 2.8894504940535888e-05
+            angularVelocity 0.0001462337982289437 2.7617980722758195e-06 -5.329417153913111e-07
+          }
+          DEF PROBE_SHAPE Shape {
+            appearance PBRAppearance {
+            }
+            geometry Cylinder {
+              height 0.08
+              radius 0.015
+            }
+          }
+        ]
+        name "solid(3)"
+        contactMaterial "probe_tip"
+        boundingObject USE PROBE_SHAPE
+        physics Physics {
+          mass 0.25
+        }
+        linearVelocity 7.787692230211453e-08 -3.640244004775305e-06 2.8896073391140532e-05
+        angularVelocity 0.00014623333248373893 2.761840613149019e-06 -5.329323511244434e-07
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 60.48090245605788
+        anchor 0.08 0.05 -0.01
+      }
+      device [
+        RotationalMotor {
+          name "motor_fr"
+        }
+        PositionSensor {
+          name "ps_fr"
+        }
+      ]
+      endPoint Solid {
+        translation 0.0800003 0.050000000151777586 -0.009999999846622218
+        rotation -0.6755571429156624 0.28394046288745756 -0.6804412981226843 2.5920488763688545
+        children [
+          DEF Wheel_shape Shape {
+            appearance PBRAppearance {
+            }
+            geometry Cylinder {
+              height 0.015
+              radius 0.025
+            }
+          }
+        ]
+        boundingObject USE Wheel_shape
+        physics Physics {
+          mass 0.1
+        }
+        linearVelocity 1.7657865628235238e-07 -7.111946530848913e-06 6.944162391277872e-06
+        angularVelocity 0.0001463527909487601 2.7584257190088e-06 -5.352145563260172e-07
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 60.480895828848965
+        anchor 0.08 -0.05 -0.01
+      }
+      device [
+        RotationalMotor {
+          name "motor_rr"
+        }
+        PositionSensor {
+          name "ps_rr"
+        }
+      ]
+      endPoint Solid {
+        translation 0.08000000000000002 -0.05000000000000008 -0.010000000000000061
+        rotation -0.675557677094926 0.28393802106556226 -0.6804417867176293 2.5920533306102636
+        children [
+          USE Wheel_shape
+        ]
+        name "solid(2)"
+        boundingObject USE Wheel_shape
+        physics Physics {
+          mass 0.1
+        }
+        linearVelocity 1.1042833389153912e-07 -7.109499262982784e-06 -7.38688449629871e-06
+        angularVelocity 0.00014635266895325394 2.758702212623782e-06 -5.352149433827004e-07
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 60.48089959384177
+        anchor -0.08 0.05 -0.01
+      }
+      device [
+        RotationalMotor {
+          name "motor_fl"
+        }
+        PositionSensor {
+          name "ps_fl"
+        }
+      ]
+      endPoint Solid {
+        translation -0.08 0.05 -0.01
+        rotation -0.675557388607252 0.2839394037873288 -0.6804414961442654 2.5920507871410132
+        children [
+          USE Wheel_shape
+        ]
+        name "solid(1)"
+        boundingObject USE Wheel_shape
+        physics Physics {
+          mass 0.1
+        }
+        linearVelocity 1.7670150592150866e-07 -7.007387621793283e-06 7.403267327958644e-06
+        angularVelocity 0.00014634756984707007 2.7584329781284675e-06 -5.352119174482617e-07
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 60.48090292864084
+        anchor -0.08 -0.05 -0.01
+      }
+      device [
+        RotationalMotor {
+          name "motor_rl"
+        }
+        PositionSensor {
+          name "ps_rl"
+        }
+      ]
+      endPoint Solid {
+        translation -0.08 -0.05 -0.01
+        rotation -0.6784907617041878 0.28290133744199186 -0.6779506763442333 2.5897811745984436
+        children [
+          USE Wheel_shape
+        ]
+        name "motor_rl"
+        boundingObject USE Wheel_shape
+        physics Physics {
+          mass 0.1
+        }
+        linearVelocity 1.1055532618397953e-07 -7.004864204665548e-06 -6.927790266360212e-06
+        angularVelocity 0.00014634730614264643 2.7587296475128205e-06 -5.351670843235565e-07
+      }
+    }
+    DEF Chasis_Frame Pose {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0.498039
+            roughness 1
+          }
+          geometry Box {
+            size 0.15 0.15 0.06
+          }
+        }
+      ]
+    }
+  ]
+  boundingObject USE Chasis_Frame
+  physics Physics {
+    mass 2.5
+  }
+  controller "Soil_Sampling_Robot"
+  linearVelocity 1.5729827693891085e-07 -8.256405250547516e-06 7.64106416681898e-09
+  angularVelocity 0.00014617999847624135 2.759119766514888e-06 -5.35163952438869e-07
+}
